@@ -21,6 +21,7 @@ public class HotelServiceImpl implements HotelService {
 
         this.hotelRepository = hotelRepository;
         logger = LoggerFactory.getLogger(HotelServiceImpl.class);
+
     }
 
     @Override

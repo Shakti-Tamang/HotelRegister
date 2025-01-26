@@ -43,5 +43,4 @@ public class ApiResponse<T>{
     @JsonProperty("paginate")
     private Page<T> pages;
 
-
 }
