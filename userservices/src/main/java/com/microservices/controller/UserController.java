@@ -1,8 +1,8 @@
-package com.microservices.hotel.controller;
+package com.microservices.controller;
 
-import com.microservices.hotel.entites.Hotel;
-import com.microservices.hotel.response.ApiResponse;
-import com.microservices.hotel.services.HotelService;
+import com.microservices.entity.HotelUser;
+import com.microservices.response.ApiResponse;
+import com.microservices.services.UserServcie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HotelController {
+public class UserController {
 
     @Autowired
-    HotelService hotelService;
+    UserServcie userServcie;
 
 
-    @PostMapping("/posthotel")
-    public ResponseEntity<ApiResponse>saveHotel(@RequestBody Hotel hotel){
-        hotelService.saveHotel(hotel);
-
+    @PostMapping("/saveUser ")
+    public ResponseEntity<ApiResponse> saveUser(@RequestBody HotelUser user){
+        userServcie.saveUser(user);
         ApiResponse apiResponse=ApiResponse.builder().message("success").statusCode(HttpStatus.OK.value()).build();
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
+
 }

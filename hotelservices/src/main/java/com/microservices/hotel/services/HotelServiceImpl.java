@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class HotelServiceImpl implements HotelService {
-
     private final HotelRepository hotelRepository;
 
     private final Logger logger;
@@ -26,7 +26,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public void saveHotel(Hotel hotel) {
-
+//String id= UUID.randomUUID().toString();
         hotelRepository.save(hotel);
     }
 
