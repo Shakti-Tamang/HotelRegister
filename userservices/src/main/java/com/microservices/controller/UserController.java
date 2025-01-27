@@ -17,7 +17,7 @@ public class UserController {
     UserServcie userServcie;
 
 
-    @PostMapping("/saveUser ")
+    @PostMapping("/saveUser")
     public ResponseEntity<ApiResponse> saveUser(@RequestBody HotelUser user){
         userServcie.saveUser(user);
         ApiResponse apiResponse=ApiResponse.builder().message("success").statusCode(HttpStatus.OK.value()).build();

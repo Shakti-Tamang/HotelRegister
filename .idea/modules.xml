@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/HotelRatingService.iml" filepath="$PROJECT_DIR$/.idea/HotelRatingService.iml" />
       <module fileurl="file://$PROJECT_DIR$/hotelservices/hotelservices.iml" filepath="$PROJECT_DIR$/hotelservices/hotelservices.iml" />
       <module fileurl="file://$PROJECT_DIR$/rating-service/rating-service.iml" filepath="$PROJECT_DIR$/rating-service/rating-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/servcieregistry/servcieregistry.iml" filepath="$PROJECT_DIR$/servcieregistry/servcieregistry.iml" />
       <module fileurl="file://$PROJECT_DIR$/userservices/userservices.iml" filepath="$PROJECT_DIR$/userservices/userservices.iml" />
     </modules>
   </component>

@@ -6,4 +6,7 @@ public class CircutBreak {
 //    blocks (opens the circuit) further calls to the failing service until it's healthy again. If
 //    calls succeed after a cooldown, the circuit "closes" to resume normal operation. This helps
 //    avoid cascading failures and improves system resilience.
+
+
+//    is is unique address
 }
