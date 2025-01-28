@@ -50,11 +50,13 @@ public class RatingController {
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
-    @GetMapping("/getAllHotelRating/{userId}")
-    public ResponseEntity<ApiResponse> geAllRatingsByUserId(@PathVariable String userId) {
-        List<HotelRatingModel> list = ratingService.getAllByUserId(userId);
-        ApiResponse apiResponse = ApiResponse.<HotelRatingModel>builder().statusCode(HttpStatus.OK.value()).list(list).build();
-        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    @GetMapping("/getAllHotelRatingGet/{userId}")
+    public ResponseEntity<List<HotelRatingModel>> getAllHotelRating(@PathVariable("userId") String userId) {
+        List<HotelRatingModel> ratings = ratingService.getAllByUserId(userId);
+        if (ratings.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(ratings);
     }
 
 }
