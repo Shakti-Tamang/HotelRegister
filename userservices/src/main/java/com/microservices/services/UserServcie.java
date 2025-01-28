@@ -7,4 +7,6 @@ import java.util.List;
 public interface UserServcie {
     public void saveUser(HotelUser user);
     public List<HotelUser>getAll();
+
+    public HotelUser getByUserId(String id);
 }
