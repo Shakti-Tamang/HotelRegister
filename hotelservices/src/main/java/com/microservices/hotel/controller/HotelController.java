@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class HotelController {
 
     @Autowired
-    HotelService hotelService;
+   private  HotelService hotelService;
 
 
+    //layered architecture and Multimodule
+
+//    dividing projects into different module
+//layerd is dividing business databse logic differently
     @PostMapping("/posthotel")
     public ResponseEntity<ApiResponse>saveHotel(@RequestBody Hotel hotel){
         hotelService.saveHotel(hotel);

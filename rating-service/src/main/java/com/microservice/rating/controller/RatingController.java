@@ -15,7 +15,7 @@ import java.util.List;
 public class RatingController {
 
     @Autowired
-    RatingService ratingService;
+   private  RatingService ratingService;
 
     @PostMapping("/saveRatings")
     public ResponseEntity<ApiResponse> saveRatings(@RequestBody HotelRatingModel hotelRatingModel) {

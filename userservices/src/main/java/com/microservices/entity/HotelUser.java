@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,16 +21,16 @@ public class HotelUser {
     @Id
     private String userId;
 
-
-
     String aboutMe;
     String password;
 
 @Email(message = "must be email")
     String email;
 
-
-
+//    In JPA, @Transient is used to mark a field that should not be persisted to the database. It is
+//    typically used for fields that are calculated or temporary and do not need to be stored.
+@Transient
+    List<HotelRatingModel>list=new ArrayList<>();
 
 
 }

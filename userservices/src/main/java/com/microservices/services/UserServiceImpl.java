@@ -5,6 +5,7 @@ import com.microservices.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -19,4 +20,11 @@ public class UserServiceImpl implements UserServcie {
         user.setUserId(UUID.randomUUID().toString());
         userRepo.save(user);
     }
+
+    @Override
+    public List<HotelUser> getAll() {
+        List<HotelUser>list=userRepo.findAll();
+        return null;
+    }
+
 }
