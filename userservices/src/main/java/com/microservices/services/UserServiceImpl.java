@@ -2,7 +2,6 @@ package com.microservices.services;
 
 import com.microservices.entity.HotelRatingModel;
 import com.microservices.entity.HotelUser;
-import com.microservices.feignclient.RatingFiegnService;
 import com.microservices.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
-
 import java.lang.module.ResolutionException;
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 
 @Service
@@ -24,16 +23,12 @@ public class UserServiceImpl implements UserServcie {
     UserRepo userRepo;
 
     @Autowired
-    private RestTemplate restTemplate;
-
-
-    @Autowired
-    private RatingFiegnService ratingService;
+    RestTemplate restTemplate;
 
     private final Logger logger;
 
-    public UserServiceImpl() {
-        this.logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    public UserServiceImpl(){
+        this.logger= LoggerFactory.getLogger(UserServiceImpl.class);
     }
 
     @Override
@@ -70,7 +65,7 @@ public class UserServiceImpl implements UserServcie {
     @Override
     public HotelUser getByUserId(String id) {
         Optional<HotelUser> hotelUser = userRepo.findById(id);
-        return hotelUser.orElse(null);
+              return hotelUser.orElse(null);
     }
 
 

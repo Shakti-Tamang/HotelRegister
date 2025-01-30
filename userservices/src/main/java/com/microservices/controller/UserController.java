@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8002")  // Allow requests from Swagger UI
 public class UserController {
 
 
@@ -46,11 +47,13 @@ public class UserController {
     }
 
     @GetMapping("/getUser/{userId}")
-    public ResponseEntity<ApiResponse>getUsersById(@PathVariable("userId") String userId){
-        HotelUser hotelUser=userServcie.getByUserId(userId);
 
-        ApiResponse apiResponse=ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).data(hotelUser).build();
-        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    public ResponseEntity<ApiResponse>getUsersById(@PathVariable("userId") String userId){
+
+            HotelUser hotelUser = userServcie.getByUserId(userId);
+
+            ApiResponse apiResponse = ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).data(hotelUser).build();
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
 
     }
 
