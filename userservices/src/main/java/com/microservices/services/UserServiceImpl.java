@@ -2,6 +2,7 @@ package com.microservices.services;
 
 import com.microservices.entity.HotelRatingModel;
 import com.microservices.entity.HotelUser;
+import com.microservices.feignclient.RatingFiegnService;
 import com.microservices.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,9 @@ public class UserServiceImpl implements UserServcie {
 
     @Autowired
     RestTemplate restTemplate;
+
+    @Autowired
+    private RatingFiegnService ratingFiegnService;
 
     private final Logger logger;
 
