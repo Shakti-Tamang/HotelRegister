@@ -2,6 +2,9 @@ package com.microservices.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,8 +32,9 @@ public class HotelUser {
 
 //    In JPA, @Transient is used to mark a field that should not be persisted to the database. It is
 //    typically used for fields that are calculated or temporary and do not need to be stored.
+
+    @ApiModelProperty(hidden = true)
 @Transient
     List<HotelRatingModel>list=new ArrayList<>();
-
 
 }

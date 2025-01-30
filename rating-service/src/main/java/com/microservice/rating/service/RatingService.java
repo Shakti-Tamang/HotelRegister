@@ -1,6 +1,9 @@
 package com.microservice.rating.service;
 
 import com.microservice.rating.entities.HotelRatingModel;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -9,7 +12,9 @@ public interface RatingService {
 
     public List<HotelRatingModel>getAllHotelRating();
 
-    public List<HotelRatingModel>getAllByUserId(String UserId);
+
+
+    List<HotelRatingModel> getAllByUserId(String userId);
 
     public  List<HotelRatingModel>getAllByHotelId(String hotelId);
 }

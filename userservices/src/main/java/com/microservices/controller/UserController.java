@@ -46,10 +46,10 @@ public class UserController {
     }
 
     @GetMapping("/getUser/{userId}")
-    public ResponseEntity<ApiResponse> getUsersById(@PathVariable("userId") String userId) {
-        HotelUser hotelUser = userServcie.getByUserId(userId);
+    public ResponseEntity<ApiResponse>getUsersById(@PathVariable("userId") String userId){
+        HotelUser hotelUser=userServcie.getByUserId(userId);
 
-        ApiResponse apiResponse = ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).data(hotelUser).build();
+        ApiResponse apiResponse=ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).data(hotelUser).build();
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
 
     }

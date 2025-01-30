@@ -1,0 +1,13 @@
+com\microservices\repo\UserRepo.class
+com\microservices\services\UserServiceImpl.class
+com\microservices\config\MyConfig.class
+com\microservices\entity\HotelRatingModel.class
+com\microservices\services\UserServcie.class
+com\microservices\entity\HotelUser.class
+com\microservices\App.class
+com\microservices\controller\UserController.class
+com\microservices\response\ApiResponse.class
+com\microservices\response\ApiResponse$ApiResponseBuilder.class
+com\microservices\entity\Hotel$HotelBuilder.class
+com\microservices\entity\Hotel.class
+com\microservices\entity\HotelRatingModel$HotelRatingModelBuilder.class

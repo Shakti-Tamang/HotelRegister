@@ -1,0 +1,8 @@
+com\microservice\rating\reponse\ApiResponse.class
+com\microservice\rating\service\RatingService.class
+com\microservice\rating\reponse\ApiResponse$ApiResponseBuilder.class
+com\microservice\rating\repo\RatingRepo.class
+com\microservice\rating\controller\RatingController.class
+com\microservice\rating\entities\HotelRatingModel.class
+com\microservice\rating\RatingApp.class
+com\microservice\rating\service\RatingServiceImpl.class

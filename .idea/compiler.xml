@@ -10,14 +10,16 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
         </processorPath>
-        <module name="rating-service" />
+        <module name="hotelservices" />
         <module name="userservices" />
         <module name="servcieregistry" />
-        <module name="hotelservices" />
+        <module name="photoupload" />
+        <module name="rating-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hotelservices" target="17" />
+      <module name="photoupload" target="17" />
       <module name="rating-service" target="17" />
       <module name="servcieregistry" target="17" />
       <module name="userservices" target="17" />
@@ -26,6 +28,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="hotelservices" options="-parameters" />
+      <module name="photoupload" options="-parameters" />
       <module name="rating-service" options="-parameters" />
       <module name="servcieregistry" options="-parameters" />
       <module name="userservices" options="-parameters" />

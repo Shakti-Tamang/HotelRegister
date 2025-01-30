@@ -2,6 +2,7 @@ package com.microservices.services;
 
 import com.microservices.entity.HotelRatingModel;
 import com.microservices.entity.HotelUser;
+import com.microservices.feignclient.RatingFiegnService;
 import com.microservices.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +13,8 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.module.ResolutionException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service
@@ -27,12 +24,16 @@ public class UserServiceImpl implements UserServcie {
     UserRepo userRepo;
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
+
+
+    @Autowired
+    private RatingFiegnService ratingService;
 
     private final Logger logger;
 
-    public UserServiceImpl(){
-        this.logger= LoggerFactory.getLogger(UserServiceImpl.class);
+    public UserServiceImpl() {
+        this.logger = LoggerFactory.getLogger(UserServiceImpl.class);
     }
 
     @Override
@@ -41,10 +42,11 @@ public class UserServiceImpl implements UserServcie {
         userRepo.save(user);
     }
 
+
+    //services intercommunication using rest template
     @Override
     public List<HotelUser> getAll() {
         List<HotelUser> users = userRepo.findAll();
-
         // Collect all userIds
         List<String> userIds = users.stream()
                 .map(HotelUser::getUserId)
@@ -52,7 +54,7 @@ public class UserServiceImpl implements UserServcie {
 
         // Make a single API call to fetch ratings for all users
         Map<String, List<HotelRatingModel>> userRatingsMap = restTemplate.postForObject(
-                "http://localhost:8076/ratings/saveRatings",
+                "http://localhost:8076/ratings/getAllHotelRatingGet/",
                 userIds,
                 Map.class
         );
@@ -62,30 +64,13 @@ public class UserServiceImpl implements UserServcie {
             List<HotelRatingModel> ratings = userRatingsMap.getOrDefault(user.getUserId(), new ArrayList<>());
             user.setList(ratings);
         }
-
         return users;
     }
 
     @Override
     public HotelUser getByUserId(String id) {
-        HotelUser hotelUser = userRepo.findById(id)
-                .orElseThrow(() -> new ResolutionException("UserId not found: " + id));
-        try {
-            ArrayList<HotelRatingModel> forObject = restTemplate.getForObject(
-                    "http://localhost:8076/ratings/getAllHotelRatingGet/" + hotelUser.getUserId(),
-                    ArrayList.class
-            );
-            hotelUser.setList(forObject);
-
-        } catch (HttpClientErrorException | HttpServerErrorException e) {
-            logger.error("Error calling ratings service: {}", e.getResponseBodyAsString());
-            throw new RuntimeException("Failed to fetch ratings data", e);
-        } catch (Exception e) {
-            logger.error("Unexpected error calling ratings service: {}", e.getMessage());
-            throw new RuntimeException("Unexpected error occurred", e);
-        }
-
-        return hotelUser;
+        Optional<HotelUser> hotelUser = userRepo.findById(id);
+        return hotelUser.orElse(null);
     }
 
 
