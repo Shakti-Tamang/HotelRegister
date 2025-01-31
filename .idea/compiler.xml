@@ -3,6 +3,15 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
+      <profile name="Annotation profile for notification" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="notification" />
+      </profile>
       <profile name="Annotation profile for rating-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -19,6 +28,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hotelservices" target="17" />
+      <module name="notification" target="17" />
       <module name="photoupload" target="17" />
       <module name="rating-service" target="17" />
       <module name="servcieregistry" target="17" />
@@ -28,6 +38,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="hotelservices" options="-parameters" />
+      <module name="notification" options="-parameters" />
       <module name="photoupload" options="-parameters" />
       <module name="rating-service" options="-parameters" />
       <module name="servcieregistry" options="-parameters" />
