@@ -49,6 +49,6 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public void deleteUser(String id) {
-        ratingRepo.deleteByRatingId(id);
+        ratingRepo.deleteByUserId(id);
     }
 }

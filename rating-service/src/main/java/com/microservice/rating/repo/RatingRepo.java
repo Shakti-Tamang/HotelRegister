@@ -12,6 +12,6 @@ public interface RatingRepo extends MongoRepository<HotelRatingModel,String> {
 
     public  List<HotelRatingModel>findByHotelId(String HotelId);
 
-    void deleteByRatingId(String id);
+    void deleteByUserId(String id);
 
 }
