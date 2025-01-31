@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients  // Enable Feign in User Service
 @EnableDiscoveryClient // Enable service discovery (optional)
-@OpenAPIDefinition(info = @Info(title = "My API for Library Management System", version = "v1",description = "This API enables efficient management of library resources for colleges, allowing users to add, search, and manage book records. It supports role-based access control to ensure that only authorized users, like administrators, can add new books and perform management tasks. Designed for seamless integration, the API streamlines common library functions, enhancing accessibility and organization."))
+@OpenAPIDefinition(info = @Info(title = "API for HotelServices",version = "V1",description = "Api for resitering the hotel"))
 public class HotelApp {
     public static void main(String[] args) {
         SpringApplication.run(HotelApp.class,args);

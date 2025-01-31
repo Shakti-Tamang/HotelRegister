@@ -9,4 +9,6 @@ public interface UserServcie {
     public List<HotelUser>getAll();
 
     public HotelUser getByUserId(String id);
+    public  void deleteById(String id);
+    public void updateUser(String id,HotelUser user);
 }

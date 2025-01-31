@@ -1,9 +1,11 @@
 package com.microservices.services;
 
+import com.microservices.entity.Hotel;
 import com.microservices.entity.HotelRatingModel;
 import com.microservices.entity.HotelUser;
 import com.microservices.feignclient.RatingFiegnService;
 import com.microservices.repo.UserRepo;
+import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
+
+import javax.transaction.Transactional;
 import java.lang.module.ResolutionException;
 import java.util.*;
 import java.util.stream.Collectors;
-
 
 
 @Service
@@ -31,46 +34,90 @@ public class UserServiceImpl implements UserServcie {
 
     private final Logger logger;
 
-    public UserServiceImpl(){
-        this.logger= LoggerFactory.getLogger(UserServiceImpl.class);
+    public UserServiceImpl() {
+        this.logger = LoggerFactory.getLogger(UserServiceImpl.class);
     }
 
     @Override
     public void saveUser(HotelUser user) {
+
         user.setUserId(UUID.randomUUID().toString());
         userRepo.save(user);
+
     }
 
 
+    @Transactional
     //services intercommunication using rest template
     @Override
     public List<HotelUser> getAll() {
         List<HotelUser> users = userRepo.findAll();
-        // Collect all userIds
-        List<String> userIds = users.stream()
-                .map(HotelUser::getUserId)
-                .collect(Collectors.toList());
+        List<HotelRatingModel> list = null;
+        boolean found = false;
+        for (HotelUser li : users) {
 
-        // Make a single API call to fetch ratings for all users
-        Map<String, List<HotelRatingModel>> userRatingsMap = restTemplate.postForObject(
-                "http://localhost:8076/ratings/getAllHotelRatingGet/",
-                userIds,
-                Map.class
-        );
 
-        // Assign ratings to users
-        for (HotelUser user : users) {
-            List<HotelRatingModel> ratings = userRatingsMap.getOrDefault(user.getUserId(), new ArrayList<>());
-            user.setList(ratings);
+            try {
+                list = ratingFiegnService.getAllByUserId(li.getUserId());
+                if (!list.isEmpty()) {
+                    li.setList(list);
+                    found = true;
+                } else {
+
+                    li.setList(new ArrayList<>());
+                }
+            } catch (FeignException.NotFound e) {
+                // Handle 404 error gracefully
+                logger.error("Hotel ratings not found for userId: " + li.getUserId());
+            }
+
+
         }
+
         return users;
     }
 
     @Override
     public HotelUser getByUserId(String id) {
         Optional<HotelUser> hotelUser = userRepo.findById(id);
-              return hotelUser.orElse(null);
+
+        List<HotelRatingModel> list = null;
+        try {
+            list = ratingFiegnService.getAllByUserId(id);
+        } catch (FeignException.NotFound e) {
+            // Handle 404 error gracefully
+            logger.error("Hotel ratings not found for userId: " + id);
+        }
+
+        HotelUser hotel = hotelUser.orElse(null);
+        hotel.setList(list);
+        return hotel;
     }
 
+    @Override
+    public void deleteById(String id) {
+        ratingFiegnService.deleteRating(id);  //
+        userRepo.deleteById(id);  //
+    }
+    @Override
+    public void updateUser(String id, HotelUser user) {
+        Optional<HotelUser> getUser = userRepo.findById(id);
 
+        if (getUser.isPresent()) {
+            HotelUser hotelUser = getUser.get();
+
+            if (user.getAboutMe() != null) {
+                hotelUser.setAboutMe(user.getAboutMe());
+            }
+            if (user.getEmail() != null) {
+                hotelUser.setEmail(user.getEmail());
+            }
+
+            if (user.getPassword() != null) {
+                hotelUser.setPassword(user.getPassword());
+            }
+            userRepo.save(hotelUser);
+        }
+
+    }
 }

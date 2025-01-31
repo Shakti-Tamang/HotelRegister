@@ -47,7 +47,6 @@ public class UserController {
     }
 
     @GetMapping("/getUser/{userId}")
-
     public ResponseEntity<ApiResponse>getUsersById(@PathVariable("userId") String userId){
 
             HotelUser hotelUser = userServcie.getByUserId(userId);
@@ -55,6 +54,26 @@ public class UserController {
             ApiResponse apiResponse = ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).data(hotelUser).build();
             return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
 
+    }
+
+    @DeleteMapping("/deleteByUserId/{userId}")
+    public ResponseEntity<ApiResponse> deleteById(@PathVariable("userId") String userId) {
+        userServcie.deleteById(userId);
+
+        ApiResponse apiResponse = ApiResponse.builder()
+                .message("User and Ratings successfully deleted")
+                .statusCode(HttpStatus.OK.value())
+                .build();
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    }
+
+    @PatchMapping("/updateUser/{userId}")
+    public ResponseEntity<ApiResponse>editUser(@PathVariable("userId") String userId,@RequestBody HotelUser user){
+
+        userServcie.updateUser(userId,user);
+
+        ApiResponse apiResponse=ApiResponse.builder().message("successfully updated").statusCode(HttpStatus.OK.value()).build();
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
 

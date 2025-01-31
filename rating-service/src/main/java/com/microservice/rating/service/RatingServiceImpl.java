@@ -46,4 +46,9 @@ public class RatingServiceImpl implements RatingService {
         List<HotelRatingModel>list=ratingRepo.findByHotelId(hotelId);
         return list.isEmpty()? new ArrayList<>():list;
     }
+
+    @Override
+    public void deleteUser(String id) {
+        ratingRepo.deleteByRatingId(id);
+    }
 }

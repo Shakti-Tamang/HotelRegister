@@ -17,4 +17,6 @@ public interface RatingService {
     List<HotelRatingModel> getAllByUserId(String userId);
 
     public  List<HotelRatingModel>getAllByHotelId(String hotelId);
+
+    public void deleteUser(String id);
 }

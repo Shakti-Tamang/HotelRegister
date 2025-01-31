@@ -1,0 +1,114 @@
+version: '3.8'
+
+services:
+  eureka-server:
+    image: openjdk:17
+    container_name: eureka-server
+    ports:
+      - "8002:8002"
+    environment:
+      - SERVER_PORT=8002
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["java", "-jar", "eureka-server.jar"]
+
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: multimicroserviceSaveUser
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Shakti
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo-db
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: prac
+      MONGO_INITDB_ROOT_USERNAME: mongoUser
+      MONGO_INITDB_ROOT_PASSWORD: mongoPass
+    volumes:
+      - mongo_data:/data/db
+
+  app1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app1
+    ports:
+      - "8087:8087"
+    environment:
+      - SPRING_APPLICATION_NAME=app1
+      - SERVER_PORT=8087
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/multimicroserviceSaveUser
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=Shakti
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8002/eureka/
+    depends_on:
+      - db
+      - eureka-server
+
+  app2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app2
+    ports:
+      - "8093:8093"
+    environment:
+      - SPRING_APPLICATION_NAME=app2
+      - SERVER_PORT=8093
+      - SPRING_DATA_MONGODB_URI=mongodb://mongoUser:mongoPass@mongo:27017/prac?authSource=admin
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8002/eureka/
+    depends_on:
+      - mongo
+      - eureka-server
+
+  app3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app3
+    ports:
+      - "8079:8079"
+    environment:
+      - SPRING_APPLICATION_NAME=app3
+      - SERVER_PORT=8079
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/multimicroserviceSaveUser
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=Shakti
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8002/eureka/
+    depends_on:
+      - db
+      - eureka-server
+
+  app4:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app4
+    ports:
+      - "8092:8092"
+    environment:
+      - SPRING_APPLICATION_NAME=app4
+      - SERVER_PORT=8092
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/multimicroserviceSaveUser
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=Shakti
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8002/eureka/
+    depends_on:
+      - db
+      - eureka-server
+
+volumes:
+  db_data: {}
+  mongo_data: {}

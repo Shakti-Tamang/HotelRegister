@@ -28,6 +28,7 @@ public class HotelServiceImpl implements HotelService {
     public void saveHotel(Hotel hotel) {
 //String id= UUID.randomUUID().toString();
         hotelRepository.save(hotel);
+
     }
 
     @Override

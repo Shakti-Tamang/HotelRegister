@@ -16,7 +16,7 @@ import java.util.List;
 public class RatingController {
 
     @Autowired
-   private  RatingService ratingService;
+    private RatingService ratingService;
 
     @PostMapping("/saveRatings")
     public ResponseEntity<ApiResponse> saveRatings(@RequestBody HotelRatingModel hotelRatingModel) {
@@ -43,7 +43,6 @@ public class RatingController {
 //    map a path variable with a different name from the URL to the method parameter.
 
 
-
     @GetMapping("/getAllHotelRating/{hotelId}")
     public ResponseEntity<ApiResponse> geAllRatingsByHotelId(@PathVariable String hotelId) {
         List<HotelRatingModel> list = ratingService.getAllByHotelId(hotelId);
@@ -58,6 +57,20 @@ public class RatingController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(ratings);
+
+//        ApiResponse apiResponse = ApiResponse.builder().message("success").statusCode(HttpStatus.OK.value()).build();
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    }
+
+    @DeleteMapping("/deleteByUser/{userId}")
+    public ResponseEntity<ApiResponse> deleteRating(@PathVariable("userId") String userId) {
+        ratingService.deleteUser(userId);
+        ApiResponse apiResponse = ApiResponse.builder()
+                .message("Ratings successfully deleted")
+                .statusCode(HttpStatus.OK.value())
+                .build();
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
 }
