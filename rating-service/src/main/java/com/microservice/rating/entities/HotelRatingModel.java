@@ -34,6 +34,6 @@ public class HotelRatingModel {
     private String feedback;
 
     @Transient
-    Hotel hotel;
+    Hotel hotel=new Hotel();
 
 }

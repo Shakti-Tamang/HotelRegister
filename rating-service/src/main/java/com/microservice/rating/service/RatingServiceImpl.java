@@ -6,6 +6,7 @@ import com.microservice.rating.feing.FeingHotelService;
 import com.microservice.rating.repo.RatingRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,12 +20,14 @@ public class RatingServiceImpl implements RatingService {
 
     private final RatingRepo ratingRepo;
     private final Logger logger;
-    private final FeingHotelService feingHotelService;
 
-    public RatingServiceImpl(RatingRepo ratingRepo, FeingHotelService feingHotelService) {
+
+    @Autowired
+    private FeingHotelService feingHotelService;
+
+    public RatingServiceImpl(RatingRepo ratingRepo) {
         this.ratingRepo = ratingRepo;
         this.logger = LoggerFactory.getLogger(RatingServiceImpl.class);
-        this.feingHotelService = feingHotelService;
     }
 
     @Override
@@ -62,12 +65,12 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public HotelRatingModel getByRatingId(String id) {
         Optional<HotelRatingModel> hotelRatingModel = ratingRepo.findById(id);
-
+        HotelRatingModel hotelRatingModel1=null;
         if (hotelRatingModel.isEmpty()) {
             throw new NoSuchElementException("No HotelRatingModel found for id: " + id);
         }
 
-        HotelRatingModel hotelRatingModel1 = hotelRatingModel.get();
+         hotelRatingModel1 = hotelRatingModel.get();
         logger.info("Hotel ID to fetch: " + hotelRatingModel1.getHotelId());
 
         try {
