@@ -27,26 +27,33 @@ public class CloudinaryController {
         this.cloudinary = cloudinary;
         this.imageService = imageService;
     }
-
-    @PostMapping("/saveImage")
+    @PostMapping(value = "/saveImage", consumes = "multipart/form-data")
     @Operation(
             summary = "Upload an image",
-            description = "Uploads an image file and returns the uploaded image details.",
-            responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Image uploaded successfully",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ImageModel.class))),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Invalid file upload"),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
-            }
+            description = "Uploads an image file and returns the uploaded image details."
     )
     public ResponseEntity<ApiResponse> saveAll(
             @RequestParam("imageUrl")
-            @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "Image file to upload", required = true,
+            @Parameter(
+                    description = "Image file to upload",
+                    required = true,
                     content = @Content(mediaType = "multipart/form-data",
                             schema = @Schema(type = "string", format = "binary")))
                     MultipartFile imageUrl
     ) throws Exception {
+
+        System.out.println("Received file: " + imageUrl.getOriginalFilename());
+        System.out.println("File size: " + imageUrl.getSize());
+
+        if (imageUrl.isEmpty()) {
+            System.out.println("File is empty");
+            ApiResponse apiResponse = ApiResponse.builder()
+                    .message("image not found")
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
+        }
+
         ImageModel imageModel = imageService.uploadImage(imageUrl);
 
         ApiResponse apiResponse = ApiResponse.<ImageModel>builder()

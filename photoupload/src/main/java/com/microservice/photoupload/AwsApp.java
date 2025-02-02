@@ -12,7 +12,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients
 @OpenAPIDefinition(info = @Info(title = "Image Upload API",version = "V1",description = "Apis for uploading images "))
-
 public class AwsApp {
     public static void main(String[] args) {
         SpringApplication.run(AwsApp.class,args);
