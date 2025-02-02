@@ -30,6 +30,9 @@
         <java.version>17</java.version>
         <spring-cloud.version>2020.0.4</spring-cloud.version> <!-- Corrected Spring Cloud version -->
         <lombok.version>1.18.24</lombok.version> <!-- Define Lombok version -->
+        <database.username>YOUR_TEST_USERNAME</database.username>
+        <database.password>YOUR_TEST_PASSWORD</database.password>
+
     </properties>
     <dependencies>
         <dependency>
@@ -57,7 +60,21 @@
             <artifactId>s3</artifactId>
             <version>2.17.68</version>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>7.10.0</version> <!-- Correct version for Spring Boot 2.5.4 -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
@@ -93,7 +110,11 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.5.13</version>
         </dependency>
-
+        <!-- For JSON serialization/deserialization -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
         <!--        Swagger setupt for solving firteabse setbase-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -122,6 +143,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>1.24.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-models</artifactId>
             <version>2.2.0</version>
@@ -144,6 +171,17 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>10.10.0</version>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/migration</url>
+                    <user>${database.username}</user>
+                    <password>${database.password}</password>
+                    <locations>classpath:db/migration</locations>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

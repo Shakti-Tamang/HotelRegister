@@ -29,4 +29,7 @@ public class HotelRatingModel {
 
     private String feedback;
 
+
+    private Hotel hotel;
+
 }

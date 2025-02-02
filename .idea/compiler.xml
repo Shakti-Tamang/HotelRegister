@@ -8,22 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="notification" />
-      </profile>
-      <profile name="Annotation profile for rating-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
         </processorPath>
+        <module name="rating-service" />
         <module name="hotelservices" />
         <module name="userservices" />
         <module name="servcieregistry" />
+        <module name="notification" />
         <module name="photoupload" />
-        <module name="rating-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
