@@ -73,4 +73,13 @@ public class RatingController {
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
+    @GetMapping("/getRating/{ratingId}")
+    public ResponseEntity<ApiResponse> getById(@PathVariable("ratingId") String ratingId) {
+        HotelRatingModel hotelRatingModel = ratingService.getByRatingId(ratingId);
+
+        ApiResponse apiResponse = ApiResponse.<HotelRatingModel>builder().message("sucess").statusCode(HttpStatus.OK.value()).data(hotelRatingModel).build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    }
+
 }

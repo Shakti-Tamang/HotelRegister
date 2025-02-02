@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableDiscoveryClient // Enable service discovery (optional)
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.microservice.rating.feing")
 @OpenAPIDefinition(info = @Info(title = "Rating API",version = "V1",description = "This apis are used for providing rating to the Hotel"))
 public class RatingApp {
     public static void main(String[] args) {

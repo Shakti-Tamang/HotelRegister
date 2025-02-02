@@ -10,13 +10,14 @@ import java.util.List;
 public interface RatingService {
     public void saveRating(HotelRatingModel hotelRatingModel);
 
-    public List<HotelRatingModel>getAllHotelRating();
-
+    public List<HotelRatingModel> getAllHotelRating();
 
 
     List<HotelRatingModel> getAllByUserId(String userId);
 
-    public  List<HotelRatingModel>getAllByHotelId(String hotelId);
+    public List<HotelRatingModel> getAllByHotelId(String hotelId);
 
     public void deleteUser(String id);
+    public HotelRatingModel getByRatingId(String id);
+
 }

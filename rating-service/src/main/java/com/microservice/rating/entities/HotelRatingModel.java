@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Transient;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -28,5 +32,8 @@ public class HotelRatingModel {
     private int rating;
 
     private String feedback;
+
+    @Transient
+    Hotel hotel;
 
 }

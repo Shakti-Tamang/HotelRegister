@@ -10,6 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients  // Enable Feign in User Service
+@EnableEurekaClient
 @EnableDiscoveryClient // Enable service discovery (optional)
 @OpenAPIDefinition(info = @Info(title = "API for HotelServices",version = "V1",description = "Api for resitering the hotel"))
 public class HotelApp {

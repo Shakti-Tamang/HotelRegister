@@ -171,6 +171,7 @@
     <orderEntry type="library" name="Maven: io.micrometer:micrometer-core:1.7.3" level="project" />
     <orderEntry type="library" name="Maven: org.hdrhistogram:HdrHistogram:2.1.12" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.latencyutils:LatencyUtils:2.0.3" level="project" />
+    <orderEntry type="library" name="Maven: org.flywaydb:flyway-core:7.10.0" level="project" />
     <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-ui:1.5.13" level="project" />
     <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-webmvc-core:1.5.13" level="project" />
     <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-common:1.5.13" level="project" />
