@@ -14,7 +14,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "hotels")
-//@FeignClient(name = "hotelModel")
 public class Hotel {
 
     @Id

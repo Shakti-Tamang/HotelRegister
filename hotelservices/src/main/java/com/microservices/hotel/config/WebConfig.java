@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // Allow Swagger UI (app1) to access API docs from app4
         registry.addMapping("/v3/api-docs/**")
-                .allowedOrigins("http://localhost:8002") // Adjust to the Swagger UI location
+                .allowedOrigins("http://localhost:8001") // Adjust to the Swagger UI location
                 .allowedMethods("GET")
                 .allowCredentials(true);
     }
