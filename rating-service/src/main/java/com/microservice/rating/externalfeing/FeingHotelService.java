@@ -1,8 +1,7 @@
-package com.microservice.rating.feing;
+package com.microservice.rating.externalfeing;
 
 import com.microservice.rating.entities.Hotel;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 

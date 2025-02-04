@@ -2,11 +2,10 @@ package com.microservice.rating.service;
 
 import com.microservice.rating.entities.Hotel;
 import com.microservice.rating.entities.HotelRatingModel;
-import com.microservice.rating.feing.FeingHotelService;
+import com.microservice.rating.externalfeing.FeingHotelService;
 import com.microservice.rating.repo.RatingRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,13 +20,11 @@ public class RatingServiceImpl implements RatingService {
     private final RatingRepo ratingRepo;
     private final Logger logger;
 
-
-    @Autowired
-    private FeingHotelService feingHotelService;
-
-    public RatingServiceImpl(RatingRepo ratingRepo) {
+    private final FeingHotelService feingHotelService;
+    public RatingServiceImpl(RatingRepo ratingRepo,FeingHotelService feingHotelService) {
         this.ratingRepo = ratingRepo;
         this.logger = LoggerFactory.getLogger(RatingServiceImpl.class);
+        this.feingHotelService=feingHotelService;
     }
 
     @Override
@@ -64,17 +61,18 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public HotelRatingModel getByRatingId(String id) {
-        Optional<HotelRatingModel> hotelRatingModel = ratingRepo.findById(id);
         HotelRatingModel hotelRatingModel1=null;
+        Optional<HotelRatingModel> hotelRatingModel = ratingRepo.findById(id);
+
         if (hotelRatingModel.isEmpty()) {
             throw new NoSuchElementException("No HotelRatingModel found for id: " + id);
         }
-
          hotelRatingModel1 = hotelRatingModel.get();
         logger.info("Hotel ID to fetch: " + hotelRatingModel1.getHotelId());
 
         try {
             Hotel hotel = feingHotelService.getByHotelId(hotelRatingModel1.getHotelId());
+
             logger.info("Hotel Response: " + hotel);
 
             if (hotel == null) {

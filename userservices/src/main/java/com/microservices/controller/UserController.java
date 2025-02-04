@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8002")  // Allow requests from Swagger UI
+@CrossOrigin(origins = "http://localhost:8001")  // Allow requests from Swagger UI
 public class UserController {
-
-
 //    post api for users:
 
 //    When you hit an API in Postman, it sends a request to the specified endpoint, which
