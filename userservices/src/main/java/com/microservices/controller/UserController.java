@@ -26,7 +26,31 @@ public class UserController {
 
     @Autowired
     UserServcie userServcie;
-
+//
+//    In Spring Boot, a starter dependency is a pre-packaged set of dependencies that
+//    simplify the configuration and setup of an application.
+//
+//🔹 Why Use Starters?
+//            ✅ Reduces the need for manual dependency management
+//✅ Automatically includes required libraries
+//✅ Provides sensible default configurations
+//
+//✔ This will automatically include Spring Core, Spring Context, and other necessary
+//    dependencies.
+//
+//
+//    ✅ Spring Context manages the lifecycle of beans.
+//✅ IoC (Inversion of Control) makes objects loosely coupled.
+//            ✅ Spring Container creates and manages beans automati cally.
+//✅ Spring Beans are objects managed by the container.
+//            ✅ Spring Bean Scopes define the lifecycle of beans.
+//Scope	Description
+//    singleton	(Default) One instance per container
+//    prototype	New instance for each request
+//    request	New instance per HTTP request (Web)
+//    session	New instance per HTTP session (Web)
+//    globalSession	New instance per global session (Web)
+//
 
     @PostMapping("/saveUser")
     public ResponseEntity<ApiResponse> saveUser(@RequestBody HotelUser user) {
