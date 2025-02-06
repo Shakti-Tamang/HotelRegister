@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepo extends JpaRepository<HotelUser,String> {
     public HotelUser  findByEmail(String email);
+//    public HotelUser findByEmailAndOrderByUserIdDesc();
+
 }

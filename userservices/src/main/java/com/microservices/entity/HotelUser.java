@@ -19,14 +19,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
+@Table(name = "users",indexes = {
+        @Index(name = "index_users",columnList = "userId")
+})
 public class HotelUser {
     @Id
     private String userId;
-
     String aboutMe;
     String password;
-
 @Email(message = "must be email")
     String email;
     Long  imageId;
