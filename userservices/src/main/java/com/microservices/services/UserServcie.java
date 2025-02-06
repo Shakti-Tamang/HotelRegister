@@ -11,4 +11,6 @@ public interface UserServcie {
     public HotelUser getByUserId(String id);
     public  void deleteById(String id);
     public void updateUser(String id,HotelUser user);
+    public List<HotelUser>getByEmailOrderByUserId(String email);
+    public List<HotelUser>getByAboutMe(String aboutMe);
 }

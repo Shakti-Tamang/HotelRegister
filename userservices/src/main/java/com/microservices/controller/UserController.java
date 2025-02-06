@@ -69,12 +69,12 @@ public class UserController {
     }
 
     @GetMapping("/getUser/{userId}")
-    public ResponseEntity<ApiResponse>getUsersById(@PathVariable("userId") String userId){
+    public ResponseEntity<ApiResponse> getUsersById(@PathVariable("userId") String userId) {
 
-            HotelUser hotelUser = userServcie.getByUserId(userId);
+        HotelUser hotelUser = userServcie.getByUserId(userId);
 
-            ApiResponse apiResponse = ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).data(hotelUser).build();
-            return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+        ApiResponse apiResponse = ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).data(hotelUser).build();
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
 
     }
 
@@ -90,12 +90,33 @@ public class UserController {
     }
 
     @PatchMapping("/updateUser/{userId}")
-    public ResponseEntity<ApiResponse>editUser(@PathVariable("userId") String userId,@RequestBody HotelUser user){
+    public ResponseEntity<ApiResponse> editUser(@PathVariable("userId") String userId, @RequestBody HotelUser user) {
 
-        userServcie.updateUser(userId,user);
+        userServcie.updateUser(userId, user);
 
-        ApiResponse apiResponse=ApiResponse.builder().message("successfully updated").statusCode(HttpStatus.OK.value()).build();
+        ApiResponse apiResponse = ApiResponse.builder().message("successfully updated").statusCode(HttpStatus.OK.value()).build();
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    }
+
+    @GetMapping("/getUsersByEmail/{email}")
+    public ResponseEntity<ApiResponse> getByEmailAsc(@PathVariable("email") String email) {
+
+        List<HotelUser> list = userServcie.getByEmailOrderByUserId(email);
+
+        ApiResponse apiResponse = ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).list(list).build();
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    }
+
+    @GetMapping("/getUserByAboutMe/{aboutMe}")
+    public ResponseEntity<ApiResponse>getByAboutMe(@PathVariable("aboutMe") String aboutMe){
+        List<HotelUser>list=userServcie.getByAboutMe(aboutMe);
+
+        ApiResponse apiResponse=ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).list(list).build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+
     }
 
 

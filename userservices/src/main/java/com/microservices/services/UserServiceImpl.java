@@ -18,6 +18,7 @@ import javax.transaction.Transactional;
 import java.lang.module.ResolutionException;
 import java.util.*;
 import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl implements UserServcie {
 
@@ -97,6 +98,7 @@ public class UserServiceImpl implements UserServcie {
         ratingFiegnService.deleteRating(id);  //
         userRepo.deleteById(id);  //
     }
+
     @Override
     public void updateUser(String id, HotelUser user) {
         Optional<HotelUser> getUser = userRepo.findById(id);
@@ -117,5 +119,19 @@ public class UserServiceImpl implements UserServcie {
             userRepo.save(hotelUser);
         }
 
+    }
+
+    @Override
+    public List<HotelUser> getByEmailOrderByUserId(String email) {
+
+        List<HotelUser> list = userRepo.findByEmailOrderByUserIdAsc(email);
+        return list.isEmpty() ? new ArrayList<>() : list;
+    }
+
+    @Override
+    public List<HotelUser> getByAboutMe(String aboutMe) {
+
+        List<HotelUser> list = userRepo.findByAboutMe(aboutMe);
+        return list.isEmpty() ? new ArrayList<>() : list;
     }
 }
