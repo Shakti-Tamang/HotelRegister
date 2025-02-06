@@ -163,6 +163,34 @@
             <version>5.4.32.Final</version> <!-- Ensure it matches the Hibernate version -->
         </dependency>
 
+        <!-- JUnit 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.7.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito for mocking dependencies -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.7.7</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Boot Test Starter for integration tests -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
@@ -185,10 +213,8 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
