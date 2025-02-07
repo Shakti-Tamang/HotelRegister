@@ -80,7 +80,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <!-- Spring Boot Starter Actuator (Optional for monitoring) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -176,7 +175,6 @@
             <version>5.7.1</version>
             <scope>test</scope>
         </dependency>
-
         <!-- Mockito for mocking dependencies -->
         <dependency>
             <groupId>org.mockito</groupId>
@@ -186,11 +184,7 @@
         </dependency>
 
         <!-- Spring Boot Test Starter for integration tests -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
@@ -199,6 +193,10 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
     </dependencies>
@@ -241,7 +239,6 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>

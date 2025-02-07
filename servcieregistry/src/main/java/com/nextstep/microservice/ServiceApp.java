@@ -14,7 +14,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 //service registery service discovery
 @EnableFeignClients  // Enable Feign in User Service
 @EnableDiscoveryClient // Enable service discovery (optional)
-@OpenAPIDefinition(info = @Info(title = "API for HotelServices",version = "V1",description = "Api for resitering the hotel"))
+@OpenAPIDefinition(info = @Info(title = "API for HotelServices", version = "V1", description = "Api for resitering the hotel"))
 public class ServiceApp {
     public static void main(String[] args) {
         SpringApplication.run(ServiceApp.class, args);

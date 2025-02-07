@@ -14,16 +14,12 @@ import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 @NamedQuery(name = "HotelUser.findByAboutMe",query = "select u from HotelUser u where u.aboutMe= :aboutMe")
-@Table(name = "users",indexes = {
-        @Index(name = "index_users",columnList = "userId")
-})
+@Table(name = "users",indexes ={@Index(name = "index_users",columnList = "userId")})
 public class HotelUser {
     @Id
     private String userId;
@@ -36,5 +32,4 @@ public class HotelUser {
 //    typically used for fields that are calculated or temporary and do not need to be stored.
   @Transient
     List<HotelRatingModel>list=new ArrayList<>();
-
 }

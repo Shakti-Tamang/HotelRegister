@@ -118,9 +118,7 @@ public class UserServiceImpl implements UserServcie {
             }
             userRepo.save(hotelUser);
         }
-
     }
-
     @Override
     public List<HotelUser> getByEmailOrderByUserId(String email) {
 
