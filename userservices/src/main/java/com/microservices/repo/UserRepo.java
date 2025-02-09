@@ -1,6 +1,8 @@
 package com.microservices.repo;
 
 import com.microservices.entity.HotelUser;
+import com.microservices.projection.ProjectNumberRole;
+import com.microservices.projection.ProjectNumberRoleDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +18,7 @@ public interface UserRepo extends JpaRepository<HotelUser,String> {
 
     @Query(name = "HotelUser.findByAboutM")
     public List<HotelUser>findByAboutMe(@Param("aboutMe") String aboutMe);
+
+    @Query("select u.role as role, COUNT(u) As count FROM HotelUser u where  u.role = 'ADMIN'")
+    public ProjectNumberRole countByRole();
 }

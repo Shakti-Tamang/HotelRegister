@@ -4,6 +4,8 @@ import com.microservices.entity.Hotel;
 import com.microservices.entity.HotelRatingModel;
 import com.microservices.entity.HotelUser;
 import com.microservices.feignclient.RatingFiegnService;
+import com.microservices.projection.ProjectNumberRole;
+import com.microservices.projection.ProjectNumberRoleDto;
 import com.microservices.repo.UserRepo;
 import feign.FeignException;
 import org.slf4j.Logger;
@@ -119,6 +121,7 @@ public class UserServiceImpl implements UserServcie {
             userRepo.save(hotelUser);
         }
     }
+
     @Override
     public List<HotelUser> getByEmailOrderByUserId(String email) {
 
@@ -132,4 +135,20 @@ public class UserServiceImpl implements UserServcie {
         List<HotelUser> list = userRepo.findByAboutMe(aboutMe);
         return list.isEmpty() ? new ArrayList<>() : list;
     }
+
+    @Override
+    public ProjectNumberRoleDto getNumbers(String role) {
+
+        ProjectNumberRole list = userRepo.countByRole();
+        list.getCount();
+        list.getRoleName();
+        ProjectNumberRoleDto projectNumberRoleDto = new ProjectNumberRoleDto();
+
+        projectNumberRoleDto.setCount(list.getCount());
+
+        projectNumberRoleDto.setRoleName(list.getRoleName());
+        return projectNumberRoleDto;
+    }
+
+
 }

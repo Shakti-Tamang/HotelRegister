@@ -1,6 +1,7 @@
 package com.microservices.services;
 
 import com.microservices.entity.HotelUser;
+import com.microservices.projection.ProjectNumberRoleDto;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface UserServcie {
     public void updateUser(String id,HotelUser user);
     public List<HotelUser>getByEmailOrderByUserId(String email);
     public List<HotelUser>getByAboutMe(String aboutMe);
+
+    public  ProjectNumberRoleDto getNumbers(String role);
 }

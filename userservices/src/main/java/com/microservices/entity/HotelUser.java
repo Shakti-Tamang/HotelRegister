@@ -28,6 +28,8 @@ public class HotelUser {
 @Email(message = "must be email")
     String email;
 
+private String role;
+
 @Column(nullable = true)
     Long  imageId;
 //    In JPA, @Transient is used to mark a field that should not be persisted to the database. It is

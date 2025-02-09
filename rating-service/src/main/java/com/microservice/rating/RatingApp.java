@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients(basePackages = "com.microservice.rating.externalfeing")
 @OpenAPIDefinition(info = @Info(title = "Rating API",version = "V1",description = "This apis are used for providing rating to the Hotel"))
 public class RatingApp {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         SpringApplication.run(RatingApp.class,args);
     }
 }
