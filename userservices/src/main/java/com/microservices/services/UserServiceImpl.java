@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserServcie {
 
     @Override
     public void saveUser(HotelUser user) {
-
         user.setUserId(UUID.randomUUID().toString());
         userRepo.save(user);
 
@@ -137,18 +136,18 @@ public class UserServiceImpl implements UserServcie {
     }
 
     @Override
-    public ProjectNumberRoleDto getNumbers(String role) {
+    public ProjectNumberRoleDto getNumbers() {
 
         ProjectNumberRole list = userRepo.countByRole();
-        list.getCount();
+        System.out.println(list.getCount());
+        System.out.println(list.getRoleName());
         list.getRoleName();
-        ProjectNumberRoleDto projectNumberRoleDto = new ProjectNumberRoleDto();
+        list.getCount();
 
+        ProjectNumberRoleDto projectNumberRoleDto = new ProjectNumberRoleDto();
+        projectNumberRoleDto.setRoleName(list.getRoleName());
         projectNumberRoleDto.setCount(list.getCount());
 
-        projectNumberRoleDto.setRoleName(list.getRoleName());
         return projectNumberRoleDto;
     }
-
-
 }

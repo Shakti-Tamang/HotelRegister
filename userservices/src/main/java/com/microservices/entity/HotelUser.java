@@ -21,15 +21,18 @@ import java.util.List;
 @NamedQuery(name = "HotelUser.findByAboutMe",query = "select u from HotelUser u where u.aboutMe= :aboutMe")
 @Table(name = "users",indexes ={@Index(name = "index_users",columnList = "userId")})
 public class HotelUser {
+
     @Id
     private String userId;
+
+    String username;
+
     String aboutMe;
     String password;
 @Email(message = "must be email")
     String email;
 
 private String role;
-
 @Column(nullable = true)
     Long  imageId;
 //    In JPA, @Transient is used to mark a field that should not be persisted to the database. It is

@@ -1,14 +1,19 @@
 package com.microservices.controller;
 
 import com.microservices.entity.HotelUser;
+import com.microservices.projection.ProjectNumberRoleDto;
 import com.microservices.response.ApiResponse;
 import com.microservices.services.UserServcie;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:8001")  // Allow requests from Swagger UI
 public class UserController {
@@ -25,6 +30,8 @@ public class UserController {
 
     @Autowired
     UserServcie userServcie;
+
+    private final Logger logger;
 //
 //    In Spring Boot, a starter dependency is a pre-packaged set of dependencies that
 //    simplify the configuration and setup of an application.
@@ -50,6 +57,10 @@ public class UserController {
 //    session	New instance per HTTP session (Web)
 //    globalSession	New instance per global session (Web)
 //
+
+    public UserController(){
+        this.logger=LoggerFactory.getLogger(UserController.class);
+    }
 
     @PostMapping("/saveUser")
     public ResponseEntity<ApiResponse> saveUser(@RequestBody HotelUser user) {
@@ -109,13 +120,24 @@ public class UserController {
     }
 
     @GetMapping("/getUserByAboutMe/{aboutMe}")
-    public ResponseEntity<ApiResponse>getByAboutMe(@PathVariable("aboutMe") String aboutMe){
-        List<HotelUser>list=userServcie.getByAboutMe(aboutMe);
+    public ResponseEntity<ApiResponse> getByAboutMe(@PathVariable("aboutMe") String aboutMe) {
+        List<HotelUser> list = userServcie.getByAboutMe(aboutMe);
 
-        ApiResponse apiResponse=ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).list(list).build();
+        ApiResponse apiResponse = ApiResponse.<HotelUser>builder().message("success").statusCode(HttpStatus.OK.value()).list(list).build();
 
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
 
+    }
+
+    @GetMapping("/getAdminCount")
+    public ResponseEntity<ApiResponse> getCountByRole() {
+        ProjectNumberRoleDto data = userServcie.getNumbers();
+        MDC.put("user role",data.getRoleName());
+
+        logger.info("user registered");
+
+        ApiResponse apiResponse = ApiResponse.builder().message("success").statusCode(HttpStatus.OK.value()).data(data).build();
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
 
