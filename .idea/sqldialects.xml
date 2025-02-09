@@ -3,6 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/photoupload/src/main/resources/db/migration/V1_images_add.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/photoupload/src/main/resources/db/migration/V2_modify_imagename.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/userservices/src/main/resources/db/migration/V 3_add.imageIdOptional.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/userservices/src/main/resources/db/migration/V1_add.imageid.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/userservices/src/main/resources/db/migration/V2_add.index.sql" dialect="GenericSQL" />
   </component>

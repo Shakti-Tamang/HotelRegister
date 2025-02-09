@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @CrossOrigin(origins = "http://localhost:8001")  // Allow requests from Swagger UI
 public class UserController {
