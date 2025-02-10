@@ -131,12 +131,12 @@ public class UserController {
 
     @GetMapping("/getAdminCount")
     public ResponseEntity<ApiResponse> getCountByRole() {
-        ProjectNumberRoleDto data = userServcie.getNumbers();
-        MDC.put("user role",data.getRoleName());
+        List<ProjectNumberRoleDto> data = userServcie.getNumbers();
+//        MDC.put("user role",data.getRoleName());
+//
+//        logger.info("user registered");
 
-        logger.info("user registered");
-
-        ApiResponse apiResponse = ApiResponse.builder().message("success").statusCode(HttpStatus.OK.value()).data(data).build();
+        ApiResponse apiResponse = ApiResponse.<ProjectNumberRoleDto>builder().message("success").statusCode(HttpStatus.OK.value()).list(data).build();
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 

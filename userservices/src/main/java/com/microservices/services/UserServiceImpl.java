@@ -135,18 +135,42 @@ public class UserServiceImpl implements UserServcie {
         return list.isEmpty() ? new ArrayList<>() : list;
     }
 
+
+    @Transactional
     @Override
-    public ProjectNumberRoleDto getNumbers() {
+    public List<ProjectNumberRoleDto> getNumbers() {
 
         ProjectNumberRole list = userRepo.countByRole();
-        System.out.println(list.getCount());
-        System.out.println(list.getRoleName());
-        list.getRoleName();
-        list.getCount();
 
-        ProjectNumberRoleDto projectNumberRoleDto = new ProjectNumberRoleDto();
-        projectNumberRoleDto.setRoleName(list.getRoleName());
-        projectNumberRoleDto.setCount(list.getCount());
+        ProjectNumberRole list1 = userRepo.countByRoleAdmin();
+
+        ProjectNumberRole list2 = userRepo.countByRoleGuset();
+        List<ProjectNumberRole> finalList = new ArrayList<>();
+        if (list != null) {
+            finalList.add(list);
+        }
+
+        if (list1 != null) {
+
+            finalList.add(list1);
+        }
+
+        if (list2 != null) {
+
+            finalList.add(list2);
+
+        }
+        for (ProjectNumberRole li : finalList) {
+            li.getCount();
+            li.getCount();
+        }
+
+        List<ProjectNumberRoleDto> projectNumberRoleDto = new ArrayList<>();
+
+        for (ProjectNumberRole li : finalList) {
+
+            projectNumberRoleDto.add(new ProjectNumberRoleDto(li.getRoleName(), li.getCount()));
+        }
 
         return projectNumberRoleDto;
     }

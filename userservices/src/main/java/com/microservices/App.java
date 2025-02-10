@@ -12,7 +12,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @SpringBootApplication
 //enabling AOP
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@EnableCaching
+//@EnableCaching
 @EnableEurekaClient
 @EnableFeignClients(basePackages = "com.microservices.feignclient")
 @OpenAPIDefinition(info = @Info(title = "My API for User Auth ", version = "v1",description = "API for authenticating or registering user"))
