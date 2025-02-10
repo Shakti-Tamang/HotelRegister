@@ -18,7 +18,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name = "HotelUser.findByAboutMe",query = "select u from HotelUser u where u.aboutMe= :aboutMe")
+
+//named query:
+//@NamedQuery(name = "HotelUser.findByAboutMe",query = "select u from HotelUser u where u.aboutMe= :aboutMe")
+
+@NamedQuery(name = "HotelUser.findByAboutMe",query = "select u from HotelUser u where u.aboutMe = ?1")
 @Table(name = "users",indexes ={@Index(name = "index_users",columnList = "userId")})
 public class HotelUser {
 

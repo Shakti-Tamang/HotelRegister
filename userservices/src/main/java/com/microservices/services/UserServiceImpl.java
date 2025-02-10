@@ -117,6 +117,7 @@ public class UserServiceImpl implements UserServcie {
             if (user.getPassword() != null) {
                 hotelUser.setPassword(user.getPassword());
             }
+
             userRepo.save(hotelUser);
         }
     }
