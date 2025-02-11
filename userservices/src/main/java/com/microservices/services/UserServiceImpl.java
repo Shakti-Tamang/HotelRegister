@@ -1,8 +1,6 @@
 package com.microservices.services;
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
-import com.microservices.entity.Hotel;
 import com.microservices.entity.HotelRatingModel;
 import com.microservices.entity.HotelUser;
 import com.microservices.feignclient.RatingFiegnService;
@@ -205,7 +203,6 @@ public class UserServiceImpl implements UserServcie {
                     user.setImageId(id);
                 }
             }
-
             // Save users to the database
             userRepo.saveAll(users);
         }
