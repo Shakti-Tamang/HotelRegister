@@ -7,4 +7,8 @@ public interface ImageService {
 
     public ImageModel uploadImage(MultipartFile file) throws Exception;
 
+    public ImageModel getImage(Long id);
+
+    public void deleteById(Long id);
+
 }

@@ -27,23 +27,15 @@ public class CloudinaryController {
         this.cloudinary = cloudinary;
         this.imageService = imageService;
     }
+
     @PostMapping(value = "/saveImage", consumes = "multipart/form-data")
     @Operation(
             summary = "Upload an image",
             description = "Uploads an image file and returns the uploaded image details."
     )
-    public ResponseEntity<ApiResponse> saveAll(@RequestParam("imageUrl")
-            @Parameter(
-                    description = "Image file to upload",
-                    required = true,
-                    content = @Content(mediaType = "multipart/form-data",
-                            schema = @Schema(type = "string", format = "binary")))
-                    MultipartFile imageUrl
-    ) throws Exception {
-
+    public ResponseEntity<ApiResponse> saveAll(@RequestParam("imageUrl") @Parameter(description = "Image file to upload", required = true, content = @Content(mediaType = "multipart/form-data", schema = @Schema(type = "string", format = "binary"))) MultipartFile imageUrl) throws Exception {
         System.out.println("Received file: " + imageUrl.getOriginalFilename());
         System.out.println("File size: " + imageUrl.getSize());
-
         if (imageUrl.isEmpty()) {
             System.out.println("File is empty");
             ApiResponse apiResponse = ApiResponse.builder()
@@ -62,5 +54,14 @@ public class CloudinaryController {
                 .build();
 
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    }
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<ApiResponse> deleteImage(@PathVariable("id") Long id) {
+        ImageModel imageModel = imageService.getImage(id);
+
+        ApiResponse apiResponse = ApiResponse.<ImageModel>builder().statusCode(HttpStatus.OK.value()).data(imageModel).build();
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+
     }
 }

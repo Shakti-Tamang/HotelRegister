@@ -8,15 +8,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ImageServiceImpl implements ImageService {
     private final ImageRepo imageRepo;
     private final Cloudinary cloudinary;
 
-    public ImageServiceImpl(ImageRepo imageRepo,Cloudinary cloudinary){
-     this.cloudinary=cloudinary;
-     this.imageRepo=imageRepo;
+    public ImageServiceImpl(ImageRepo imageRepo, Cloudinary cloudinary) {
+        this.cloudinary = cloudinary;
+        this.imageRepo = imageRepo;
     }
 
     @Override
@@ -30,5 +31,16 @@ public class ImageServiceImpl implements ImageService {
         image.setImageUrl(imageUrl);
         image.setPublicId(publicId);
         return imageRepo.save(image);
+    }
+
+    @Override
+    public ImageModel getImage(Long id) {
+        Optional<ImageModel> imageModel = imageRepo.findById(id);
+        return imageModel.orElse(null);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        imageRepo.deleteById(id);
     }
 }
