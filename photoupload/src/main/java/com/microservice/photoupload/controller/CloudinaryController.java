@@ -32,8 +32,7 @@ public class CloudinaryController {
             summary = "Upload an image",
             description = "Uploads an image file and returns the uploaded image details."
     )
-    public ResponseEntity<ApiResponse> saveAll(
-            @RequestParam("imageUrl")
+    public ResponseEntity<ApiResponse> saveAll(@RequestParam("imageUrl")
             @Parameter(
                     description = "Image file to upload",
                     required = true,

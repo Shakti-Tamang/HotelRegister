@@ -2,6 +2,7 @@ package com.microservices.services;
 
 import com.microservices.entity.HotelUser;
 import com.microservices.projection.ProjectNumberRoleDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface UserServcie {
     public List<HotelUser>getByAboutMe(String aboutMe);
 
     public  List<ProjectNumberRoleDto> getNumbers();
+
+    public void saveBulk(MultipartFile file) throws Exception;
 }

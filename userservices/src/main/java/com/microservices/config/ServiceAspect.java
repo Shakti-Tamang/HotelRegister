@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class ServiceAspect {
-
     private static final Logger logger = LoggerFactory.getLogger(ServiceAspect.class);
 
     // Logging before method execution

@@ -2,13 +2,13 @@ package com.microservices.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import com.opencsv.bean.CsvBindByName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.ArrayList;
@@ -29,18 +29,28 @@ public class HotelUser {
     @Id
     private String userId;
 
+    @CsvBindByName(column = "username")
     String username;
 
+    @CsvBindByName(column = "aboutMe")
     String aboutMe;
+
+    @CsvBindByName(column = "password")
     String password;
-@Email(message = "must be email")
+
+    @CsvBindByName(column = "email")
+    @Email(message = "must be email")
     String email;
 
-private String role;
-@Column(nullable = true)
+     @CsvBindByName(column = "role")
+     private String role;
+
+    @Column(nullable = true)
     Long  imageId;
+
 //    In JPA, @Transient is used to mark a field that should not be persisted to the database. It is
 //    typically used for fields that are calculated or temporary and do not need to be stored.
-  @Transient
+    @Schema(hidden = true)
+    @Transient
     List<HotelRatingModel>list=new ArrayList<>();
 }

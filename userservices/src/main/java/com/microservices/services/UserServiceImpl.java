@@ -1,5 +1,7 @@
 package com.microservices.services;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.microservices.entity.Hotel;
 import com.microservices.entity.HotelRatingModel;
 import com.microservices.entity.HotelUser;
@@ -7,6 +9,8 @@ import com.microservices.feignclient.RatingFiegnService;
 import com.microservices.projection.ProjectNumberRole;
 import com.microservices.projection.ProjectNumberRoleDto;
 import com.microservices.repo.UserRepo;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +19,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.InputStreamReader;
 import java.lang.module.ResolutionException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,6 +38,9 @@ public class UserServiceImpl implements UserServcie {
 
     @Autowired
     private RatingFiegnService ratingFiegnService;
+
+    @Autowired
+    Cloudinary cloudinary;
 
     private final Logger logger;
 
@@ -100,7 +109,7 @@ public class UserServiceImpl implements UserServcie {
         userRepo.deleteById(id);  //
     }
 
-    @Override
+      @Override
     public void updateUser(String id, HotelUser user) {
         Optional<HotelUser> getUser = userRepo.findById(id);
 
@@ -174,5 +183,31 @@ public class UserServiceImpl implements UserServcie {
         }
 
         return projectNumberRoleDto;
+    }
+
+    @Override
+    public void saveBulk(MultipartFile file) throws Exception {
+        try (InputStreamReader reader = new InputStreamReader(file.getInputStream())) {
+            CsvToBean<HotelUser> csvToBean = new CsvToBeanBuilder<HotelUser>(reader)
+                    .withType(HotelUser.class)
+                    .withSkipLines(1)
+                    .build();
+            List<HotelUser> users = csvToBean.parse();
+
+            // Optionally upload image to Cloudinary for each user
+            for (HotelUser user : users) {
+                if (user.getImageId() != null) {
+                    // Upload image to Cloudinary (assuming imageId is a URL or file name)
+//                    Map<String, Object> uploadResult = cloudinary.uploader().upload(user.getImageId(), ObjectUtils.emptyMap());
+//                    String imageUrl = (String) uploadResult.get("url");
+                    // Save the image URL to the user entity
+                    Long id=user.getImageId();
+                    user.setImageId(id);
+                }
+            }
+
+            // Save users to the database
+            userRepo.saveAll(users);
+        }
     }
 }

@@ -4,6 +4,11 @@ import com.microservices.entity.HotelUser;
 import com.microservices.projection.ProjectNumberRoleDto;
 import com.microservices.response.ApiResponse;
 import com.microservices.services.UserServcie;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -11,11 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8001")  // Allow requests from Swagger UI
+@Tag(name = "Users", description = "API for saving users")
 public class UserController {
 //    post api for users:
 
@@ -69,6 +76,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
+
+    @Operation(description = "getUsers",summary = "api to get all users")
     @GetMapping("/getUsers")
     public ResponseEntity<ApiResponse> getUserAll() {
         List<HotelUser> list = userServcie.getAll();
@@ -140,5 +149,29 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
+//    Yes, exactly!
+//
+//    Key Difference:
+//    PUT (Full Update) → You must send all fields in the JSON request. If a field is
+//        missing, it may be erased or set to null (depending on your implementation).
+//    PATCH (Partial Update) → You only send the fields you want to update, and the other
+//    fields remain unchanged.
 
+    @PostMapping(value = "/saveBulkAsCsv", consumes = "multipart/form-data")
+    @Operation(summary = "api for saving for bulk user",description = "this api is used to save multiple user at once")
+    public ResponseEntity<ApiResponse>saveBulkl(@RequestParam("file") @Parameter(description = "Image file to upload", required = true, content = @Content(mediaType = "multipart/form-data", schema = @Schema(type = "string", format = "binary"))) MultipartFile file) {
+   try{
+
+    userServcie.saveBulk(file);
+
+    ApiResponse apiResponse=ApiResponse.builder().message("succesFully user saved").statusCode(HttpStatus.OK.value()).build();
+
+    return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+   }
+
+   catch (Exception e){
+    ApiResponse apiResponse=ApiResponse.builder().message("not saved").statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).build();
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiResponse);
+      }
+    }
 }
