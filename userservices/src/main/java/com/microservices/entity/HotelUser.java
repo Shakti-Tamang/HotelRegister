@@ -19,9 +19,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 //named query:
-//@NamedQuery(name = "HotelUser.findByAboutMe",query = "select u from HotelUser u where u.aboutMe= :aboutMe")
-
-@NamedQuery(name = "HotelUser.findByAboutMe",query = "select u from HotelUser u where u.aboutMe = ?1")
+@NamedQuery(name = "HotelUser.findByAboutMe",query = "select u from HotelUser u where u.aboutMe= :aboutMe")
+//
+//When using named parameters (:aboutMe) in a JPQL query, you must use @Param("aboutMe") in the
+//        method signature. Without @Param, Spring Data JPA won't know how to bind the method
+//        argument to the query parameter, causing an IllegalArgumentException. However, when using
+//        positional parameters (?1), Spring automatically assigns the method's first argument to ?1, so @Param is
+//        not required. This is because positional parameters follow the order of method arguments, while named parameters
+//        rely on explicit mapping. If you omit @Param in a named parameter query, Spring cannot resolve it properly. Therefore,
+//        use @Param only when working with named parameters, not positional ones.
+//@NamedQuery(name = "HotelUser.findByAboutMe",query = "select u from HotelUser u where u.aboutMe = ?1")
 @Table(name = "users",indexes ={@Index(name = "index_users",columnList = "userId")})
 public class HotelUser {
 

@@ -1,5 +1,6 @@
 package com.microservices.config;
 
+
 public class AopAndOOP {
 //
 //    Sure! Let's break it down into simpler terms:
