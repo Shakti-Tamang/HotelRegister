@@ -56,13 +56,11 @@ public interface UserRepo extends JpaRepository<HotelUser,String> {
 
     public ProjectNumberRole countByRoleAdmin();
 
-
     @Query("select u.role as roleName, COUNT(u) As count FROM HotelUser u where  u.role = 'GUEST' group by u.role")
      public ProjectNumberRole countByRoleGuset();
 
-
-    @Query("")
-    public HotelUser findByUsernameIsContaining();
+//    @Query("")
+//    public HotelUser findByUsernameIsContaining();
 
 }
 

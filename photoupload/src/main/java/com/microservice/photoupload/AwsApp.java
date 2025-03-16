@@ -15,6 +15,5 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class AwsApp {
     public static void main(String[] args) {
         SpringApplication.run(AwsApp.class,args);
-
     }
 }

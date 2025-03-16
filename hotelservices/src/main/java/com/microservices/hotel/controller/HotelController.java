@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/hotels")
-@CrossOrigin(origins = "http://localhost:8001")  // Allow requests from Swagger UI
+@CrossOrigin(origins = "http://localhost:8016")  // Allow requests from Swagger UI
 public class HotelController {
     @Autowired
     private HotelService hotelService;

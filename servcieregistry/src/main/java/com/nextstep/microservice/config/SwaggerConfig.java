@@ -22,7 +22,8 @@ public class SwaggerConfig {
                         new Server().url("http://localhost:8079").description("app3"),
                         new Server().url("http://localhost:8092").description("app4"),
                         new Server().url("http://localhost:8093").description("app2"),
-                        new Server().url("http://localhost:8087").description("app1")
+                        new Server().url("http://localhost:8089").description("app1"),
+                        new Server().url("http://localhost:8069").description("app6")
                 ));
     }
 }

@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8001")  // Allow requests from Swagger UI
+@CrossOrigin(origins = "http://localhost:8016")  // Allow requests from Swagger UI
 @Tag(name = "Users", description = "API for saving users")
 public class UserController {
 //    post api for users:
@@ -38,7 +38,7 @@ public class UserController {
     @Autowired
     UserServcie userServcie;
 
-    private final Logger logger;
+//    private final Logger logger;
 //
 //    In Spring Boot, a starter dependency is a pre-packaged set of dependencies that
 //    simplify the configuration and setup of an application.
@@ -65,15 +65,19 @@ public class UserController {
 //    globalSession	New instance per global session (Web)
 //
 
-    public UserController(){
-        this.logger=LoggerFactory.getLogger(UserController.class);
-    }
+//    public UserController(){
+//        this.logger=LoggerFactory.getLogger(UserController.class);
+//    }
 
     @PostMapping("/saveUser")
     public ResponseEntity<ApiResponse> saveUser(@RequestBody HotelUser user) {
+
+
         userServcie.saveUser(user);
         ApiResponse apiResponse = ApiResponse.builder().message("success").statusCode(HttpStatus.OK.value()).build();
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+
+
     }
 
 
@@ -118,7 +122,7 @@ public class UserController {
     }
 
     @GetMapping("/getUsersByEmail/{email}")
-    public ResponseEntity<ApiResponse> getByEmailAsc(@PathVariable("email") String email) {
+    public ResponseEntity<ApiResponse> fgetByEmailAsc(@PathVariable("email") String email) {
 
         List<HotelUser> list = userServcie.getByEmailOrderByUserId(email);
 

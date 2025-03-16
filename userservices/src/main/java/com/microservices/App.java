@@ -9,6 +9,20 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
+
+//The @SpringBootApplication annotation is a combination of three annotations:
+//
+//@Configuration – Marks the class as a Spring configuration class.
+//@EnableAutoConfigurati on – Enables Spring Boot’s auto-configuration mechanism.
+//@ComponentScan – Scans the package where the application is located and registers components (like @Service, @Repository, @Controller).
+//
+//No, the @Bean annotation requires the class to be marked with @Configuration (or at least @Component) for Spring to recognize and register the bean.
+//
+//        Why?
+//        The @Bean annotation is used inside a class that defines Spring beans programmatically.
+//        Without @Configuration, Spring won't scan and register the beans.
+//        Example (Works correctly with @Configuration):
+
 @SpringBootApplication
 @EnableAdminServer
 //enabling AOP

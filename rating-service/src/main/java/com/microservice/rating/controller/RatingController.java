@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ratings")
-@CrossOrigin(origins = "http://localhost:8001")
+@CrossOrigin(origins = "http://localhost:8016")
 public class RatingController {
 
     @Autowired

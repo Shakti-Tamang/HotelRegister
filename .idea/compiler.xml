@@ -3,28 +3,20 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for aync" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="aync" />
-      </profile>
-      <profile name="Annotation profile for notification" enabled="true">
+      <profile name="Annotation profile for hotelservices" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
         </processorPath>
-        <module name="rating-service" />
+        <module name="photoupload" />
         <module name="hotelservices" />
-        <module name="userservices" />
+        <module name="aync" />
         <module name="servcieregistry" />
         <module name="notification" />
-        <module name="photoupload" />
+        <module name="userservices" />
+        <module name="rating-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

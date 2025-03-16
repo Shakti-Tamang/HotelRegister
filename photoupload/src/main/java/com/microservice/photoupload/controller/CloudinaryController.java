@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/images")
-@CrossOrigin(origins = "http://localhost:8001") // Allows cross-origin requests
+@CrossOrigin(origins = "http://localhost:8016")  // Allows cross-origin requests
 @Tag(name = "Image Upload", description = "API for uploading images to Cloudinary")
 public class CloudinaryController {
 
