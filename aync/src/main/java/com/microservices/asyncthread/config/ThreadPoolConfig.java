@@ -10,6 +10,20 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @Configuration
 @EnableAsync
 public class ThreadPoolConfig {
+//    A Thread Pool is a collection of pre-instantiated, idle threads that are ready to be used to perform tasks.
+//    Thread pools are used to manage and reuse threads for multiple tasks, rather than creating a new thread every
+//    time a task needs to be executed. This helps improve performance and reduce overhead in managing threads.
+//    Thread pools are a key part of concurrent programming, allowing efficient management of resources (threads)
+//    and better application performance.
+//
+//    How a Thread Pool Works:
+//    Task Submission: Tasks are submitted to the thread pool.
+//    Thread Execution: If there is an idle thread in the pool, it picks up the task and starts executing it. If no
+//    idle threads are available, the task is queued.
+//    Task Completion: Once the task is completed, the thread becomes idle again and is available for the next task.
+//    Thread Reuse: Instead of creating new threads for each task, existing threads are reused, reducing the overhead
+//    of thread creation and destruction.
+//
 
     private final Logger logger;
 
