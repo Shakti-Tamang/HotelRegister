@@ -39,6 +39,9 @@ public class ThreadPoolConfig {
     @Bean
     public ThreadPoolTaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+//        Yes, in Spring Boot's ThreadPoolTaskExecutor, the setCorePoolSize(20)
+//        means the minimum number of threads that will always be kept alive in
+//        the pool, even if they are idle.
         threadPoolTaskExecutor.setCorePoolSize(20);
         threadPoolTaskExecutor.setMaxPoolSize(40);
         threadPoolTaskExecutor.setQueueCapacity(70);
