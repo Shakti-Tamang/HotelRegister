@@ -10,6 +10,7 @@ import java.util.List;
 
 @Builder
 @Data
+//api response
 public class ApiResponse<T>{
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("message")
