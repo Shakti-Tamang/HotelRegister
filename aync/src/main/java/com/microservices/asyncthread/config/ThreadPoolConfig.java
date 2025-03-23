@@ -59,7 +59,7 @@ public class ThreadPoolConfig {
         threadPoolTaskExecutor.setCorePoolSize(20);
         threadPoolTaskExecutor.setMaxPoolSize(40);
         threadPoolTaskExecutor.setQueueCapacity(70);
-        threadPoolTaskExecutor.setThreadNamePrefix("MyAsyncThread-");
+        threadPoolTaskExecutor.setThreadNamePrefix("ShaktiThread-");
         threadPoolTaskExecutor.setRejectedExecutionHandler((r, executor1) -> logger.warn("Task rejected, thread pool is full and queue is also full"));
         threadPoolTaskExecutor.initialize();
 
