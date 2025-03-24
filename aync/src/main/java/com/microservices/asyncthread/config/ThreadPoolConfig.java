@@ -2,10 +2,16 @@ package com.microservices.asyncthread.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.interceptor.AsyncExecutionInterceptor;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.lang.Nullable;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import java.util.concurrent.Executor;
 
 @Configuration
 @EnableAsync
@@ -50,6 +56,24 @@ public class ThreadPoolConfig {
 //    Queue-size:total number of task that can be accomodated in queue
 
     //    it takes the consideration like memory size cpu
+
+
+
+
+
+
+//    AsyncExecutionInterceptor:
+//   This intecpter is very important
+//@Nullable
+//protected Executor getDefaultExecutor(@Nullable BeanFactory beanFactory) {
+//    Executor defaultExecutor = super.getDefaultExecutor(beanFactory);
+//    return (Executor)(defaultExecutor != null ? defaultExecutor : new SimpleAsyncTaskExecutor());
+//}
+//    according to above fucntion in AsyncExceutionInteceptor if deafultExceutor is null
+//    which means  if below threadPool setup by us is null
+//    it will use  SimpleAsyncTaskExecutor else it will use defaultin hwich it will
+//    creates its own thread pool will core size and all
+//    SimpleAsyncTaskExecutor
     @Bean
     public ThreadPoolTaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
@@ -64,5 +88,8 @@ public class ThreadPoolConfig {
         threadPoolTaskExecutor.initialize();
 
         return threadPoolTaskExecutor;
+
+
+
     }
 }
