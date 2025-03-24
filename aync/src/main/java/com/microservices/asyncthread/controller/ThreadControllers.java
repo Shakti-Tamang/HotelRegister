@@ -53,6 +53,26 @@ public class ThreadControllers {
         System.out.println("thraad response"+"\t"+Thread.currentThread().getName());
       threadService.asyncMethodTest();
         return HttpStatus.OK.toString();
+
     }
+
+//    public String FirstThread(){
+//        System.out.println("thraad response"+"\t"+Thread.currentThread().getName());
+//        threadService.asyncMethodTest();
+//        return HttpStatus.OK.toString();
+//
+//    }
+
+
+
+    @GetMapping("/getThraedLife")
+    public ResponseEntity<String>GetAllThread(){
+
+
+        return ResponseEntity.ok("success");
+    }
+
+
+
 
 }
