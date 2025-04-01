@@ -7,6 +7,7 @@ public class Parent2  implements Gaprent,Gparent2{
   public void play(){
 //    System.out.println("by by");
         Gaprent.super.play();
+
     }
 
 
