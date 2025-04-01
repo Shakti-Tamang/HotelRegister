@@ -68,7 +68,8 @@ public class ThreadControllers {
     @GetMapping("/getThraedLife")
     public ResponseEntity<String>GetAllThread(){
 
-
+        System.out.println("thread response 2"+"\t"+Thread.currentThread().getName());
+        threadService.thraedHeat();
         return ResponseEntity.ok("success");
     }
 
